@@ -21,7 +21,7 @@ public class Projekte {
     @OneToMany(mappedBy = "projekteByPrNr",
         cascade = CascadeType.ALL,
         orphanRemoval = true,
-        fetch = FetchType.LAZY)
+        fetch = FetchType.EAGER)
     private Set<Arbeitspakete> arbeitspaketesByNr;
 
     public Projekte(Integer nr, String titel, String code, Set<Arbeitspakete> arbeitspaketesByNr) {
@@ -31,7 +31,6 @@ public class Projekte {
     }
 
     public Projekte() {
-
     }
 
     public Integer getNr() {
