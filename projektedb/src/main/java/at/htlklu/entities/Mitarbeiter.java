@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -44,7 +45,7 @@ public class Mitarbeiter {
         fetch = FetchType.LAZY)
     private Set<MaApZuord> maApZuordsById;
 
-    public Mitarbeiter(Integer id, String nachname, String vorname, String geschlecht, LocalDate gebdat, String strasse, String plz, String ort, String bundesland, Set<MaApZuord> maApZuordsById) {
+    public Mitarbeiter(String nachname, String vorname, String geschlecht, LocalDate gebdat, String strasse, String plz, String ort, String bundesland) {
         this.nachname = nachname;
         this.vorname = vorname;
         this.geschlecht = geschlecht;
@@ -53,7 +54,7 @@ public class Mitarbeiter {
         this.plz = plz;
         this.ort = ort;
         this.bundesland = bundesland;
-        this.maApZuordsById = maApZuordsById;
+        this.maApZuordsById = new HashSet<>();
     }
 
     public Mitarbeiter() {

@@ -2,6 +2,7 @@ package at.htlklu.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -28,11 +29,11 @@ public class Arbeitspakete {
         fetch = FetchType.LAZY)
     private Set<MaApZuord> maApZuordsById;
 
-    public Arbeitspakete(Integer id, String code, String bezeichnung, Projekte projekteByPrNr, Set<MaApZuord> maApZuordsById) {
+    public Arbeitspakete(Integer id, String code, String bezeichnung, Projekte projekteByPrNr) {
         this.code = code;
         this.bezeichnung = bezeichnung;
         this.projekteByPrNr = projekteByPrNr;
-        this.maApZuordsById = maApZuordsById;
+        this.maApZuordsById = new HashSet<>();
     }
 
     public Arbeitspakete(){

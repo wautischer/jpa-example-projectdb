@@ -54,5 +54,4 @@ public class ProjekteDAO {
         em.close();
         return tempP;
     }
-
 }

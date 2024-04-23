@@ -14,7 +14,7 @@ public class MaApZuord {
     private Integer id;
     @Basic
     @Column(name = "std", nullable = false)
-    private Object std;
+    private Integer std;
     @Basic
     @Column(name = "datum", nullable = false)
     private Date datum;
@@ -30,7 +30,7 @@ public class MaApZuord {
     @JoinColumn(name = "ap_id", referencedColumnName = "id", nullable = false)
     private Arbeitspakete arbeitspaketeByApId;
 
-    public MaApZuord(Integer id, Object std, LocalDate datum, String anmerkung, Mitarbeiter mitarbeiterByMaId, Arbeitspakete arbeitspaketeByApId) {
+    public MaApZuord(int std, LocalDate datum, String anmerkung, Mitarbeiter mitarbeiterByMaId, Arbeitspakete arbeitspaketeByApId) {
         this.std = std;
         this.datum = Date.valueOf(datum);
         this.anmerkung = anmerkung;
@@ -50,11 +50,11 @@ public class MaApZuord {
         this.id = id;
     }
 
-    public Object getStd() {
+    public Integer getStd() {
         return std;
     }
 
-    public void setStd(Object std) {
+    public void setStd(Integer std) {
         this.std = std;
     }
 
