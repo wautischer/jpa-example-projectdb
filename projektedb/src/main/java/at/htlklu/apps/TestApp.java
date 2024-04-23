@@ -89,7 +89,6 @@ public class TestApp {
         MaApZuord maApZuord;
 
         try {
-
             //Mitarbeiter hinzufügen
             et.begin();
             Mitarbeiter mitarbeiter = new Mitarbeiter("Wautischer","Laurin","m",
@@ -124,7 +123,25 @@ public class TestApp {
         //endregion
 
         //region Bringen Sie ein Projekt in den state „managed“ und fügen Sie ein neues Arbeitspaket ein.
+        EntityManager em2 = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityTransaction et2 = em2.getTransaction();
 
+        Projekte p_in_context;
+
+        try {
+            et2.begin();
+            //Manage Projekt
+            p_in_context = em2.find(Projekte.class, 1);
+            Arbeitspakete ap = new Arbeitspakete("FSST", "Programmieren",p_in_context);
+            em2.persist(ap);
+            em2.flush();
+            et2.commit();
+        } finally {
+            if (et2.isActive()) {
+                et2.rollback();
+            }
+            em2.close();
+        }
         //endregion
     }
 }

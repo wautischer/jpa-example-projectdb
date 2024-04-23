@@ -29,7 +29,7 @@ public class Arbeitspakete {
         fetch = FetchType.LAZY)
     private Set<MaApZuord> maApZuordsById;
 
-    public Arbeitspakete(Integer id, String code, String bezeichnung, Projekte projekteByPrNr) {
+    public Arbeitspakete(String code, String bezeichnung, Projekte projekteByPrNr) {
         this.code = code;
         this.bezeichnung = bezeichnung;
         this.projekteByPrNr = projekteByPrNr;
