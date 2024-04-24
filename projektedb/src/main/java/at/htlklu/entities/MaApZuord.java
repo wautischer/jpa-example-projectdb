@@ -34,8 +34,8 @@ public class MaApZuord {
         this.std = std;
         this.datum = Date.valueOf(datum);
         this.anmerkung = anmerkung;
-        this.mitarbeiterByMaId = mitarbeiterByMaId;
-        this.arbeitspaketeByApId = arbeitspaketeByApId;
+        mitarbeiterByMaId.addMaApZuord(this);
+        arbeitspaketeByApId.addMaApZuord(this);
     }
 
     public MaApZuord() {

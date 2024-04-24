@@ -82,30 +82,20 @@ public class TestApp {
         EntityTransaction et = em.getTransaction();
 
         Arbeitspakete ap_in_context;
-        MaApZuord maApZuord;
 
         try {
-            //Mitarbeiter hinzufügen
             et.begin();
-            Mitarbeiter mitarbeiter = new Mitarbeiter("Wautischer","Laurin","m",
-                    LocalDate.parse("2006-04-19"), "Linsengasse", "9020", "Klagenfurt", "Kärnten");
-            em.persist(mitarbeiter);
 
             //Arbeitspaket holen
             ap_in_context = em.find(Arbeitspakete.class, 4);
 
+            //Mitarbeiter hinzufügen
+            Mitarbeiter mitarbeiter = new Mitarbeiter("Wautischer via Add","Laurin","m",
+                    LocalDate.parse("2006-04-19"), "Linsengasse", "9020", "Klagenfurt", "Kärnten");
+            em.persist(mitarbeiter);
+
             //MaApZuord
-            maApZuord = new MaApZuord(12,LocalDate.now(),"",mitarbeiter,ap_in_context);
-            em.persist(maApZuord);
-
-            //Verknüpfen
-            Set<MaApZuord> temp = ap_in_context.getMaApZuordsById();
-            temp.add(maApZuord);
-            ap_in_context.setMaApZuordsById(temp);
-
-            Set<MaApZuord> temp2 = mitarbeiter.getMaApZuordsById();
-            temp2.add(maApZuord);
-            mitarbeiter.setMaApZuordsById(temp2);
+            MaApZuord maApZuord = new MaApZuord(12,LocalDate.now(),"",mitarbeiter,ap_in_context);
 
             em.flush();
             et.commit();
@@ -128,7 +118,7 @@ public class TestApp {
             //Manage Projekt
             p_in_context = em2.find(Projekte.class, 1);
             Arbeitspakete ap = new Arbeitspakete("FSST", "Programmieren",p_in_context);
-            em2.persist(ap);
+            //em2.persist(ap); nicht notwendig wegen der addArbeitspaket Methode in Projekte!
             em2.flush();
             et2.commit();
         } finally {

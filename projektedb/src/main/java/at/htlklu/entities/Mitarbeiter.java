@@ -54,11 +54,16 @@ public class Mitarbeiter {
         this.plz = plz;
         this.ort = ort;
         this.bundesland = bundesland;
-        this.maApZuordsById = new HashSet<>();
+        maApZuordsById = new HashSet<>();
     }
 
     public Mitarbeiter() {
+        maApZuordsById = new HashSet<>();
+    }
 
+    public void addMaApZuord(MaApZuord maap) {
+        this.maApZuordsById.add(maap);
+        maap.setMitarbeiterByMaId(this);
     }
 
     public Integer getId() {

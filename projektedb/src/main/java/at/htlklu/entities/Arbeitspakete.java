@@ -41,6 +41,11 @@ public class Arbeitspakete {
         maApZuordsById = new HashSet<>();
     }
 
+    public void addMaApZuord(MaApZuord maap) {
+        this.maApZuordsById.add(maap);
+        maap.setArbeitspaketeByApId(this);
+    }
+
     public Integer getId() {
         return id;
     }
