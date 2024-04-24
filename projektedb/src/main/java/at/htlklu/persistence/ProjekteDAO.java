@@ -20,6 +20,11 @@ public class ProjekteDAO {
         return em.createQuery("select e from Mitarbeiter e").getResultList();
     }
 
+    public static List<Arbeitspakete> getAllArbeitspakete() {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        return em.createQuery("select e from Arbeitspakete e").getResultList();
+    }
+
     public static List<Mitarbeiter> findAdress(String name) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         TypedQuery<Mitarbeiter> query = em.createQuery("select e from Mitarbeiter e where e.nachname = ?1 ", Mitarbeiter.class);

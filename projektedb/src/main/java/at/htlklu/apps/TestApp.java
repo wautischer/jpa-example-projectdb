@@ -8,11 +8,7 @@ import at.htlklu.persistence.JPAUtil;
 import at.htlklu.persistence.ProjekteDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import jakarta.transaction.Transaction;
-
-import java.beans.PropertyEditor;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -50,7 +46,7 @@ public class TestApp {
         //endregion
 
         //region Welche Bezeichnung haben die Arbeitspakete des Projekts mit dem Code X > X soll als Übergabeparameter der Methode übergeben werden?
-        List<Projekte> projekteByCodeList = ProjekteDAO.getProjectByCode("WSTP");
+        List<Projekte> projekteByCodeList = ProjekteDAO.getProjectByCode("FSST");
         for (Projekte p : projekteByCodeList) {
             System.out.println(p.getArbeitspaketesByNr());
         }
@@ -94,7 +90,6 @@ public class TestApp {
             Mitarbeiter mitarbeiter = new Mitarbeiter("Wautischer","Laurin","m",
                     LocalDate.parse("2006-04-19"), "Linsengasse", "9020", "Klagenfurt", "Kärnten");
             em.persist(mitarbeiter);
-            em.flush();
 
             //Arbeitspaket holen
             ap_in_context = em.find(Arbeitspakete.class, 4);
@@ -102,7 +97,6 @@ public class TestApp {
             //MaApZuord
             maApZuord = new MaApZuord(12,LocalDate.now(),"",mitarbeiter,ap_in_context);
             em.persist(maApZuord);
-            em.flush();
 
             //Verknüpfen
             Set<MaApZuord> temp = ap_in_context.getMaApZuordsById();
@@ -113,6 +107,7 @@ public class TestApp {
             temp2.add(maApZuord);
             mitarbeiter.setMaApZuordsById(temp2);
 
+            em.flush();
             et.commit();
         } finally {
             if (et.isActive()){
@@ -141,6 +136,13 @@ public class TestApp {
                 et2.rollback();
             }
             em2.close();
+        }
+        //endregion
+
+        //region get All Arbeitspakete
+        List<Arbeitspakete> all_ap = ProjekteDAO.getAllArbeitspakete();
+        for (Arbeitspakete ap : all_ap) {
+            System.out.println(ap.toString());
         }
         //endregion
     }
