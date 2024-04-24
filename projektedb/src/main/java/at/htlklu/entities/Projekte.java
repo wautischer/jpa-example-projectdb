@@ -2,6 +2,7 @@ package at.htlklu.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -24,13 +25,18 @@ public class Projekte {
         fetch = FetchType.EAGER)
     private Set<Arbeitspakete> arbeitspaketesByNr;
 
-    public Projekte(Integer nr, String titel, String code, Set<Arbeitspakete> arbeitspaketesByNr) {
+    public Projekte(String titel, String code) {
         this.titel = titel;
         this.code = code;
-        this.arbeitspaketesByNr = arbeitspaketesByNr;
+        arbeitspaketesByNr = new HashSet<>();
     }
 
     public Projekte() {
+    }
+
+    public void addArbeitspaket(Arbeitspakete ap) {
+        this.arbeitspaketesByNr.add(ap);
+        ap.setProjekteByPrNr(this);
     }
 
     public Integer getNr() {

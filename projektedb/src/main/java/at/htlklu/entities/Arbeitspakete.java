@@ -32,12 +32,13 @@ public class Arbeitspakete {
     public Arbeitspakete(String code, String bezeichnung, Projekte projekteByPrNr) {
         this.code = code;
         this.bezeichnung = bezeichnung;
-        this.projekteByPrNr = projekteByPrNr;
-        this.maApZuordsById = new HashSet<>();
+        maApZuordsById = new HashSet<>();
+
+        projekteByPrNr.addArbeitspaket(this);
     }
 
     public Arbeitspakete(){
-
+        maApZuordsById = new HashSet<>();
     }
 
     public Integer getId() {
